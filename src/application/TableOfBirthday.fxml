@@ -28,12 +28,13 @@
             <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
          </padding>
       </HBox>
-      <HBox spacing="10.0">
+      <HBox spacing="300.0">
          <padding>
             <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
          </padding>
          <children>
             <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deletePushed" text="Delete" />
+            <Button fx:id="backButton" mnemonicParsing="false" onAction="#backPushed" text="torna indietro" />
          </children>
       </HBox>
    </children>

@@ -13,6 +13,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -21,6 +24,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import model.Model;
 import model.Person;
 
@@ -58,6 +63,9 @@ public class TableOfBirthdayController {
 
     @FXML
     private Button deleteButton;
+    
+    @FXML
+    private Button backButton;
     
     private Model model = new Model();
     private DAOcompleanni dao = new DAOcompleanni();
@@ -122,18 +130,7 @@ public class TableOfBirthdayController {
     	this.model = model;
     	ObservableList<Person> persons = listPersone();
     	birthdayTable.setItems(persons);
-    	MonthDay today = MonthDay.from(LocalDate.now());
-    	int counter = 0;
-    	for(Person p: persons) {
-    		MonthDay birthday = MonthDay.from(p.getNatoIl());
-    		if(today.equals(birthday)) {
-    			System.out.println("Oggi è il compleanno di " + p.toString());
-    			counter++;
-    		}
-    	}
-    	if(counter == 0) {
-    		System.out.println("Nessun compleanno oggi.");
-    	}
+    	
     }
     
     public ObservableList<Person> listPersone(){
@@ -141,6 +138,27 @@ public class TableOfBirthdayController {
     	lista.addAll(model.getPersons());
     	return lista;
     	
+    }
+    
+    @FXML
+    void backPushed(ActionEvent event) {
+    	try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("SplashScreen.fxml"));
+			VBox root = (VBox)loader.load();
+			SplashScreenController controller = loader.getController();
+			
+			//set Model
+			Model model = new Model();
+			controller.setModel(model);
+			
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+			stage.setScene(scene);
+			stage.show();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
     }
 
     @FXML

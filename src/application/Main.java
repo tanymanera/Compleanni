@@ -17,9 +17,9 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("TableOfBirthday.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("SplashScreen.fxml"));
 			VBox root = (VBox)loader.load();
-			TableOfBirthdayController controller = loader.getController();
+			SplashScreenController controller = loader.getController();
 			
 			//set Model
 			Model model = new Model();

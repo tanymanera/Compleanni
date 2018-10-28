@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.MonthDay;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +26,24 @@ public class Model {
 
 	public boolean isPutIn(String nome, String cognome) {
 		return dao.isPutIn(nome, cognome);
+	}
+	
+	public String festeggiati() {
+		StringBuilder result = new StringBuilder();
+		List<Person> persons = getPersons();
+		MonthDay today = MonthDay.from(LocalDate.now());
+    	int counter = 0;
+    	for(Person p: persons) {
+    		MonthDay birthday = MonthDay.from(p.getNatoIl());
+    		if(today.equals(birthday)) {
+    			result.append(p.toString() + "\n");
+    			counter++;
+    		}
+    	}
+    	if(counter == 0) {
+    		result.append("Nessun compleanno oggi.\n");
+    	}
+		return result.toString();
 	}
 
 }
