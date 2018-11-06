@@ -16,7 +16,7 @@ public class DAOcompleanni {
 
 	public List<Person> listaPersone() {
 		List<Person> persons = new ArrayList<>();
-		Connection conn = DBConnect.getInstance().getConnection();
+		Connection conn = DBConnect.getConnection();
 		String sql = "SELECT id, nome, cognome, nato_il FROM persone";
 		PreparedStatement st;
 		try {
@@ -39,7 +39,7 @@ public class DAOcompleanni {
 	}
 
 	public void insertPerson(Person newPerson) {
-		Connection conn = DBConnect.getInstance().getConnection();
+		Connection conn = DBConnect.getConnection();
 		String sql = "INSERT INTO persone " + "(nome, cognome, nato_il) " + "VALUES " + "(?, ?, ?)";
 		PreparedStatement st;
 		try {
@@ -57,7 +57,7 @@ public class DAOcompleanni {
 	}
 
 	public void delete(Person delenda) {
-		Connection conn = DBConnect.getInstance().getConnection();
+		Connection conn = DBConnect.getConnection();
 		String sql = "DELETE FROM persone WHERE id = ?";
 		PreparedStatement st;
 		
@@ -75,7 +75,7 @@ public class DAOcompleanni {
 	}
 
 	public boolean isPutIn(String nome, String cognome) {
-		Connection conn = DBConnect.getInstance().getConnection();
+		Connection conn = DBConnect.getConnection();
 		String sql = "SELECT * FROM persone WHERE nome = ? AND cognome = ?";
 		PreparedStatement st;
 		try {
